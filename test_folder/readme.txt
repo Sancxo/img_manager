@@ -1,0 +1,1 @@
+This folder is a test folder, so you can use the tool on it and separate the images from this .txt file.
