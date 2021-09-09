@@ -4,9 +4,24 @@ defmodule ImgManager do
             |> String.trim
 
         if path === "-q" do
-           "Goodbye !"
+           quit()
         else
             create_folder(path)
+        end
+    end
+
+    def quit do
+        quit? = IO.gets("Do you really want to quit this tool ? (Y/N) ")
+            |> String.trim()
+
+        case quit? do
+            "Y" ->
+                IO.puts("\nGoodbye mate !")
+            "N" -> 
+                start()
+            _ -> 
+                IO.puts("\nInvalid command, retry.\n")
+                quit()
         end
     end
 
@@ -45,14 +60,15 @@ defmodule ImgManager do
     def confirm(path, folder, files) do
         Enum.any?(files, fn file -> 
             if String.ends_with?(file, [".jpg", ".png", ".gif", ".bmp"]) do
-                _confirm = IO.gets(~s[There images in "#{path}", do you want to move them in "#{folder}"" ? (Y/N) ])
+                confirm = IO.gets(~s[There is images in "#{path}", do you want to move them in "#{folder}"" ? (Y/N) ])
                     |> String.trim
-                    |> process(files, folder, path)
+
+                process(path, folder, files, confirm)
             end
         end)
     end
 
-    def process(confirm, files, folder, path) do
+    def process(path, folder, files, confirm) do
         case confirm do
             "Y" ->
                 Enum.each(files, fn file -> 
@@ -71,7 +87,7 @@ defmodule ImgManager do
                 create_folder(path)
 
             _ -> 
-                IO.puts("\nInvalid command.\n")
+                IO.puts("\nInvalid command, retry.\n")
                 parse_imgs(folder, path)
 
         end
