@@ -3,8 +3,9 @@
 ## How to use the script ?
 
 - Put the `img_manager.exs` into the folder you want to manage the images.
-- Launch a terminal in this folder, then type `elixir img_manager.exs`
-- Follow instructions.
+- Launch a terminal in this folder, then type `elixir img_manager.exs`.
+- If the script is in another folder than the one you want to manage the images, type `elixir absolute/or/relative/path/img_manager.exs`.
+- Magic happens.
 
 ## Old
 - Open a terminal in the img_manager folder.
